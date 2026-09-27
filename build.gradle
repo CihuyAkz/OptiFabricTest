@@ -1,14 +1,9 @@
-plugins {
-	id 'fabric-loom' version '1.7.4'
-	id 'maven-publish'
-	id 'com.gradleup.shadow' version '8.3.5'
-}
-
 // TODO(port-1.21.1, unverified): switched from Chocohead's custom Fabric-Loom fork
 // (fabric-loom:2fc5f55) to the official net.fabricmc fabric-loom plugin, because the old
 // fork cannot resolve Minecraft 1.21.1's multi-classifier native libraries
 // (see the ':minecraftInducedLibraries' / netty-transport-native-epoll error from CI).
 // This is a structural change I could not compile-test here - expect more fallout.
+// NOTE: buildscript {} must come before plugins {} in Gradle - fixed after CI caught this.
 buildscript {
 	repositories {
 		mavenCentral()
@@ -18,7 +13,13 @@ buildscript {
 	}
 }
 
- (including 1.21.1) requires Java 21 at runtime and to compile against.
+plugins {
+	id 'fabric-loom' version '1.7.4'
+	id 'maven-publish'
+	id 'com.gradleup.shadow' version '8.3.5'
+}
+
+// Minecraft 1.20.5+ (including 1.21.1) requires Java 21 at runtime and to compile against.
 sourceCompatibility = JavaVersion.VERSION_21
 targetCompatibility = JavaVersion.VERSION_21
 

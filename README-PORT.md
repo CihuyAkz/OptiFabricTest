@@ -65,3 +65,33 @@ sebagian besar komunitas modding Fabric pakai sekarang menggantikan OptiFine.
 Sudah dibuat di `.github/workflows/build.yml`: pakai JDK 21, `actions/checkout@v4`,
 `actions/setup-java@v4`, `gradle/actions/setup-gradle@v4` (dengan cache), lalu upload jar hasil
 build sebagai artifact, plus upload log kalau build gagal supaya gampang didiagnosis.
+
+## 4. Update: migrasi ke Fabric Loom resmi (percobaan, belum teruji)
+
+CI sempat gagal lagi dengan:
+```
+Could not resolve all dependencies for configuration ':minecraftInducedLibraries'
+Caused by: io.netty:netty-transport-native-epoll:4.1.97.Final has more than one client module definitions.
+```
+Ini karena fork Loom lama (`com.github.Chocohead.Fabric-Loom:fabric-loom:2fc5f55`) tidak paham
+format daftar native library Minecraft 1.21.1 (yang mendeklarasikan beberapa classifier platform
+sekaligus). Solusinya bukan tambal kecil — saya migrasikan `build.gradle`/`settings.gradle` dari
+fork itu ke **Fabric Loom resmi (`id 'fabric-loom' version '1.7.4'`)**, dan plugin Shadow ke
+penerus resminya (`com.gradleup.shadow`).
+
+Perubahan lain yang mengikuti:
+- Blok custom `compileJava { mappings { ... } }` (fitur eksklusif fork lama untuk menambal celah
+  mapping named<->intermediary) **dihapus total** - Loom resmi tidak punya fitur ini. Kalau nanti
+  compile gagal karena ada kelas/metode intermediary yang tidak kebentuk otomatis dari nama
+  named-nya, itu perlu ditelusuri manual lewat browser mapping (mis. linkie.shedaniel.dev).
+- Bagian yang saya tandai `TODO(port-1.21.1, unverified)` di `build.gradle` adalah tempat saya
+  **tidak bisa memastikan** kompatibilitasnya tanpa compile nyata: import
+  `net.fabricmc.loom.util.NestedJars` (dipakai untuk nested-jar packaging) dan package class
+  `ShadowJar` - keduanya API internal/pihak ketiga yang bisa saja berubah signature-nya di
+  versi baru.
+
+Ini titik paling jujur untuk saya sampaikan: dari sini dan seterusnya, cara paling efektif
+lanjutkan adalah kamu jalankan `./gradlew build` di komputer sendiri (biar siklus error->fix cepat,
+tidak lewat upload log satu-satu), atau terus kirim log CI ke saya tiap gagal - saya baca dan
+kasih fix bertahap, tapi tidak bisa saya jamin ini berhenti di 1-2 iterasi lagi mengingat
+kompleksitas OptiFabric.

@@ -1,0 +1,11 @@
+{
+	"parent": "optifabric.mixins.json",
+	"package": "me.modmuss50.optifabric.compat.indigo.mixin",
+	"plugin": "me.modmuss50.optifabric.compat.indigo.IndigoMixinPlugin",
+	"mixins": [
+		"RebuildTaskNewerMixin",
+		"ChunkCacheOFAccess",
+		"ChunkCacheOFNewMixin",
+		"BlockModelRendererNewMixin"
+	]
+}

@@ -1,0 +1,8 @@
+{
+    "parent": "optifabric.compat.apoli-newerer.mixins.json",
+    "package": "me.modmuss50.optifabric.compat.apoli.mixin",
+    "plugin": "me.modmuss50.optifabric.compat.apoli.ApoliMixinPlugin",
+    "mixins": [
+        "BackgroundRendererNewerMixin"
+    ]
+}

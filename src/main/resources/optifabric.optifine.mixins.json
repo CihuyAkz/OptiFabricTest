@@ -1,0 +1,14 @@
+{
+	"parent": "optifabric.mixins.json",
+	"package": "me.modmuss50.optifabric.mixin",
+	"mixins": [
+		"MixinReflectorClass",
+		"MixinOptifineConfig",
+		"CustomColoursMixin",
+		"ShadersMixin",
+		"VideoOptionsScreenMixin",
+		"Config",
+		"SMCLog",
+		"ParticleManagerMixin"
+	]
+}

@@ -1,0 +1,8 @@
+{
+	"parent": "optifabric.mixins.json",
+	"package": "me.modmuss50.optifabric.compat.ae2.mixin",
+	"mixins": [
+		"BakedQuadAccess",
+		"FaceRotatingModelMixin"
+	]
+}

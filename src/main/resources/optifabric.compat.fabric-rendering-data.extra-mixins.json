@@ -1,0 +1,8 @@
+{
+	"parent": "optifabric.compat.fabric-rendering-data.mixins.json",
+	"package": "me.modmuss50.optifabric.compat.fabricrenderingdata.mixin",
+	"plugin": "me.modmuss50.optifabric.compat.fabricrenderingdata.RenderingDataExtraMixinPlugin",
+	"mixins": [
+		"ChunkRendererRegionMixin"
+	]
+}

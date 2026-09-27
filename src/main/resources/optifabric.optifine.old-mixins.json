@@ -1,0 +1,7 @@
+{
+	"parent": "optifabric.optifine.mixins.json",
+	"package": "me.modmuss50.optifabric.mixin",
+	"mixins": [
+		"MixinDefaultResourcePack"
+	]
+}

@@ -1,0 +1,8 @@
+{
+	"parent": "optifabric.compat.charm-old.mixins.json",
+	"package": "me.modmuss50.optifabric.compat.charm.mixin.old",
+	"plugin": "me.modmuss50.optifabric.compat.charm.CharmMixinPlugin",
+	"mixins": [
+		"UtilMixin"
+	]
+}
